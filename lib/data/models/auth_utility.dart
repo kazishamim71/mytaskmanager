@@ -5,10 +5,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthUtility{
   AuthUtility._();
+  static LoginModel userInfo=LoginModel();
 
   static Future<void> saveUserInfo(LoginModel model)async {
     SharedPreferences _sharedPrefs= await SharedPreferences.getInstance();
-    await _sharedPrefs.setString('user-data', model.toJson().toString());
+    await _sharedPrefs.setString('user-data', jsonEncode(model.toJson().toString()));
   }
   static Future<LoginModel> getUserInfo(LoginModel model)async {
     SharedPreferences _sharedPrefs= await SharedPreferences.getInstance();
@@ -21,7 +22,12 @@ class AuthUtility{
   }
   static Future<bool> checkUserLoggedIn() async{
     SharedPreferences _sharedPrefs= await SharedPreferences.getInstance();
-    return _sharedPrefs.containsKey('user-data');
+    bool _isLogin=_sharedPrefs.containsKey('user-data');
+    if(_isLogin){
+
+      //userInfo= await getUserInfo();
+    }
+     return _sharedPrefs.containsKey('user-data');
 
   }
 
