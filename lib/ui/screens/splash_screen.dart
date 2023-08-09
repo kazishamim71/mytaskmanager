@@ -28,7 +28,7 @@ class _SplashScreenState extends State<SplashScreen> {
       if(mounted){
         Navigator.pushAndRemoveUntil(
             context,
-            MaterialPageRoute(builder: (context) => isLoggedIn? BottomNavBaseScreen(): const LoginScreen()),
+            MaterialPageRoute(builder: (context) => isLoggedIn? const BottomNavBaseScreen(): const LoginScreen()),
             (route) => false);
       }
     });
