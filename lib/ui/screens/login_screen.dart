@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mytaskmanager/data/models/auth_utility.dart';
+import 'package:mytaskmanager/data/models/login_model.dart';
 import 'package:mytaskmanager/data/models/network_response.dart';
 import 'package:mytaskmanager/data/service/network_caller.dart';
 import 'package:mytaskmanager/ui/screens/bottom_nav_base_screen.dart';
@@ -33,6 +35,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   final NetworkResponse response = await NetworkCaller().postRequest(Urls.login, responseBody);
   if(response.isSuccess){
+    LoginModel model=LoginModel.fromJson(response.body!);
+      await AuthUtility.saveUserInfo(model);
     if(mounted){
         Navigator.pushAndRemoveUntil(
             context,
